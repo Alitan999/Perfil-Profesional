@@ -1,58 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Enchanted flower</title>
-    <link rel="stylesheet" href="enchanted flower.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  </head>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALAN SERVÍN TREJO | Cybersecurity & Visual Intel</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fuentes de alta fidelidad -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
 
-  <body>
-    <div class="flower__wrapper">
-      <div class="flower__sparkles">
-        <div class="flower__sparkle"></div>
-        <div class="flower__sparkle"></div>
-        <div class="flower__sparkle"></div>
-        <div class="flower__sparkle"></div>
-        <div class="flower__sparkle"></div>
-        <div class="flower__sparkle"></div>
-        <div class="flower__sparkle"></div>
-        <div class="flower__sparkle"></div>
-      </div>
-      <div class="flower">
-        <div class="flower__steam-wrapper">
-          <div class="flower__leaf flower__leaf--first"></div>
-          <div class="flower__leaf flower__leaf--second"></div>
-          <div class="flower__steam">
-            <div class="flower__steam-end"></div>
-          </div>
-        </div>
-        <div class="flower__head flower__head--main">
-          <div
-            class="flower__petal flower__petal--back flower__petal--left flower__petal--back-left"></div>
-          <div
-            class="flower__petal flower__petal--back flower__petal--right flower__petal--back-right"></div>
-          <div
-            class="flower__petal flower__petal--front flower__petal--left flower__petal--front-left"></div>
-          <div
-            class="flower__petal flower__petal--front flower__petal--right flower__petal--front-right"></div>
-          <div class="flower__center">
-            <div class="flower__seeds">
-              <div class="flower__seed"></div>
-              <div class="flower__seed"></div>
-              <div class="flower__seed"></div>
-              <div class="flower__seed"></div>
-              <div class="flower__seed"></div>
-              <div class="flower__seed"></div>
-              <div class="flower__seed"></div>
-              <div class="flower__seed"></div>
-              <div class="flower__seed"></div>
+    <!-- Capas de fondo -->
+    <canvas id="matrix-canvas"></canvas>
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+
+    <div class="container">
+        <main class="cyber-panel">
+            <div class="top-status">
+                <div class="status-group">
+                    <span class="pulse-dot"></span>
+                    <span>SYSTEM_STATUS: <span class="highlight">ONLINE</span></span>
+                </div>
+                <span>SESSION_ID: <span id="session-id">AS-7700-X</span></span>
+                <span>UTC: <span id="clock" class="highlight">00:00:00</span></span>
             </div>
-          </div>
-        </div>
-      </div>
+
+            <header>
+                <span class="access-text">ACCESO AUTORIZADO // PERFIL_USUARIO</span>
+                <h1>ALAN JESÚS<br>SERVÍN TREJO</h1>
+                <div class="role-bar">ESTRATEGA EN CIBERSEGURIDAD // INTELIGENCIA VISUAL</div>
+            </header>
+
+            <div class="grid-layout">
+                <section class="bio-section">
+                    <p>
+                        Estratega tecnológico especializado en <strong>seguridad defensiva y narrativa visual</strong>. Mi labor se centra en desglosar sistemas complejos para identificar vulnerabilidades y construir arquitecturas digitales resilientes.
+                    </p>
+                    <p>
+                        Mediante el uso de <strong>Inteligencia Artificial</strong> y automatización, optimizo procesos de respuesta técnica. Mi formación se complementa con la fotografía, aportando un ojo clínico para el detalle operativo y la documentación técnica de alta precisión.
+                    </p>
+                    
+                    <div class="vision-quote">
+                        <span class="quote-label">// DECLARACIÓN_DE_MISIÓN</span>
+                        <p>"Transformar la vigilancia técnica en seguridad proactiva, garantizando que la innovación digital sea intrínsecamente responsable y protegida."</p>
+                    </div>
+                </section>
+
+                <aside class="sidebar">
+                    <div class="data-box">
+                        <h3>[ CORE_SKILLS ]</h3>
+                        <ul class="skills-list">
+                            <li>CIBER-DEFENSA</li>
+                            <li>ANÁLISIS FORENSE</li>
+                            <li>DEV-SEC-OPS</li>
+                            <li>IA APLICADA</li>
+                            <li>OPTICS & DOCS</li>
+                        </ul>
+                    </div>
+
+                    <div class="data-box secondary">
+                        <h3>[ CURRENT_FOCUS ]</h3>
+                        <p>Protección de infraestructuras críticas y análisis de riesgos en ecosistemas Cloud.</p>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="terminal-footer">
+                <div class="terminal-line">
+                    <span class="prompt">$</span> exec system_check --profile "AlanServin"
+                </div>
+                <div class="terminal-line response">
+                    > STATUS: <span class="highlight">READY_TO_OPERATE</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">$</span> <span class="cursor">█</span>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            PROYECTO: ALPHA_ULTRA | MÉXICO 2026 | CIFRADO_AES_256
+        </footer>
     </div>
 
-    <script src="enchanted flower.js"></script>
-  </body>
+    <script src="script.js"></script>
+</body>
 </html>
