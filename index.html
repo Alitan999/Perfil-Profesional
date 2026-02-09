@@ -3,89 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALAN SERVÍN TREJO | Cybersecurity & Visual Intel</title>
+    <title>ALAN JESÚS SERVÍN TREJO | Cyber Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Fuentes de alta fidelidad -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Capas de fondo -->
+    <!-- Background Layers -->
     <canvas id="matrix-canvas"></canvas>
-    <div class="vignette"></div>
-    <div class="scanlines"></div>
+    <div class="overlay-vignette"></div>
 
     <div class="container">
-        <main class="cyber-panel">
-            <div class="top-status">
-                <div class="status-group">
-                    <span class="pulse-dot"></span>
-                    <span>SYSTEM_STATUS: <span class="highlight">ONLINE</span></span>
-                </div>
-                <span>SESSION_ID: <span id="session-id">AS-7700-X</span></span>
-                <span>UTC: <span id="clock" class="highlight">00:00:00</span></span>
-            </div>
-
+        <main class="main-frame">
             <header>
-                <span class="access-text">ACCESO AUTORIZADO // PERFIL_USUARIO</span>
-                <h1>ALAN JESÚS<br>SERVÍN TREJO</h1>
-                <div class="role-bar">ESTRATEGA EN CIBERSEGURIDAD // INTELIGENCIA VISUAL</div>
+                <div class="avatar-box">
+                    <div class="scan-bar"></div>
+                    <img src="avatar.png" alt="Alan Jesús Servín Trejo" class="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="avatar-placeholder" style="display:none;">[ NO_AVATAR_DETECTION ]</div>
+                </div>
+                <div class="header-info">
+                    <div class="sys-id">UID: SERVIN_TREJO_CORE_v5.1</div>
+                    <h1>ALAN JESÚS<br>SERVÍN TREJO</h1>
+                    <div class="role-tag">
+                        <span>[ CYBERSECURITY ]</span>
+                        <span>[ DIGITAL INNOVATION ]</span>
+                        <span>[ PHOTOGRAPHY ]</span>
+                    </div>
+                </div>
             </header>
 
-            <div class="grid-layout">
-                <section class="bio-section">
+            <div class="content-grid">
+                <section class="about-text">
                     <p>
-                        Estratega tecnológico especializado en <strong>seguridad defensiva y narrativa visual</strong>. Mi labor se centra en desglosar sistemas complejos para identificar vulnerabilidades y construir arquitecturas digitales resilientes.
+                        Soy un entusiasta de la tecnología con un fuerte interés en la <strong>ciberseguridad, la innovación digital y la fotografía</strong>. Me motiva comprender cómo funcionan los sistemas desde su base, analizar riesgos y desarrollar soluciones que aporten seguridad, eficiencia y valor real.
                     </p>
                     <p>
-                        Mediante el uso de <strong>Inteligencia Artificial</strong> y automatización, optimizo procesos de respuesta técnica. Mi formación se complementa con la fotografía, aportando un ojo clínico para el detalle operativo y la documentación técnica de alta precisión.
+                        A lo largo de mi formación y proyectos personales he explorado áreas como <strong>desarrollo web, inteligencia artificial, automatización y hardware</strong>, siempre con una mentalidad analítica y orientada a la mejora continua.
                     </p>
-                    
-                    <div class="vision-quote">
-                        <span class="quote-label">// DECLARACIÓN_DE_MISIÓN</span>
-                        <p>"Transformar la vigilancia técnica en seguridad proactiva, garantizando que la innovación digital sea intrínsecamente responsable y protegida."</p>
+                    <p>
+                        Paralelamente, la <strong>fotografía</strong> se ha convertido en una herramienta creativa que me permite observar, documentar y comunicar ideas desde una perspectiva visual y técnica.
+                    </p>
+
+                    <div class="philosophy-card">
+                        <p class="quote">
+                            "Creo firmemente que la tecnología no solo debe funcionar, sino también ser responsable, segura y capaz de contar historias."
+                        </p>
                     </div>
                 </section>
 
-                <aside class="sidebar">
-                    <div class="data-box">
-                        <h3>[ CORE_SKILLS ]</h3>
-                        <ul class="skills-list">
-                            <li>CIBER-DEFENSA</li>
-                            <li>ANÁLISIS FORENSE</li>
-                            <li>DEV-SEC-OPS</li>
-                            <li>IA APLICADA</li>
-                            <li>OPTICS & DOCS</li>
-                        </ul>
+                <aside class="tech-stack">
+                    <h3>Languages & Environments</h3>
+                    
+                    <div class="tech-item">
+                        <h4>JavaScript</h4>
+                        <p>Web development, interactive apps, and server-side logic.</p>
                     </div>
 
-                    <div class="data-box secondary">
-                        <h3>[ CURRENT_FOCUS ]</h3>
-                        <p>Protección de infraestructuras críticas y análisis de riesgos en ecosistemas Cloud.</p>
+                    <div class="tech-item">
+                        <h4>Python</h4>
+                        <p>Automation, AI, scripting, and data analysis.</p>
+                    </div>
+
+                    <div class="tech-item">
+                        <h4>C / C++ (Arduino)</h4>
+                        <p>Hardware projects, control, and embedded systems.</p>
+                    </div>
+
+                    <div class="tech-item">
+                        <h4>HTML & CSS</h4>
+                        <p>Modern UI/UX design and structure.</p>
+                    </div>
+
+                    <div class="objective-box">
+                        <h4>CAREER_OBJECTIVE</h4>
+                        <p>Protecting systems and networks in increasingly complex digital environments.</p>
                     </div>
                 </aside>
             </div>
 
-            <div class="terminal-footer">
-                <div class="terminal-line">
-                    <span class="prompt">$</span> exec system_check --profile "AlanServin"
-                </div>
-                <div class="terminal-line response">
-                    > STATUS: <span class="highlight">READY_TO_OPERATE</span>
-                </div>
-                <div class="terminal-line">
-                    <span class="prompt">$</span> <span class="cursor">█</span>
-                </div>
+            <div class="terminal-box">
+                <div class="term-line">$ system_init --profile "Alan_Servin"</div>
+                <div class="term-line">> Analyzing risks... [OK]</div>
+                <div class="term-line">> Loading visual narrative... [OK]</div>
+                <div class="term-line">> Loading BinarySearch modules... [OK]</div>
+                <div class="term-line">> Status: <span class="white-text">SYSTEM READY FOR SECURE DEPLOYMENT</span></div>
+                <div class="term-line">$ <span class="cursor">█</span></div>
             </div>
         </main>
 
         <footer>
-            PROYECTO: ALPHA_ULTRA | MÉXICO 2026 | CIFRADO_AES_256
+            ALAN JESÚS SERVÍN TREJO | 2026 | AES_256_ENCRYPTED | MEXICO_LOC
         </footer>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
