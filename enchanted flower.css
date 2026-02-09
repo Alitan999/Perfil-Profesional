@@ -1,255 +1,225 @@
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #000038;
-  height: 100vh;
+:root {
+    --matrix-bright: #00ffcc;
+    --matrix-glow: rgba(0, 255, 204, 0.4);
+    --bg-black: #000808;
+    --panel-bg: rgba(2, 12, 12, 0.75);
+    --text-main: #f0fdfa;
+    --text-dim: #94a3b8;
 }
 
-.flower {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.flower__sparkles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
 }
-.flower__sparkle {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background: linear-gradient(#fff, #f5fccd);
-  box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
+
+/* Efectos de Fondo */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
 }
-.flower__sparkle:nth-child(1) {
-  top: 10%;
-  left: 40%;
+
+.vignette {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 30%, #000 120%);
+    z-index: 1;
+    pointer-events: none;
 }
-.flower__sparkle:nth-child(2) {
-  top: 25%;
-  left: 20%;
+
+.scanlines {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+    background-size: 100% 3px, 3px 100%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.4;
 }
-.flower__sparkle:nth-child(3) {
-  top: 40%;
-  left: 30%;
+
+/* Contenedor y Panel */
+.container {
+    position: relative;
+    z-index: 10;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 20px;
 }
-.flower__sparkle:nth-child(4) {
-  top: 50%;
-  left: 10%;
+
+.cyber-panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--matrix-bright);
+    box-shadow: 0 0 40px rgba(0, 255, 204, 0.15), inset 0 0 20px rgba(0, 255, 204, 0.05);
+    padding: 50px;
+    border-radius: 4px;
+    animation: bootSequence 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.flower__sparkle:nth-child(5) {
-  top: 80%;
-  right: 30%;
+
+@keyframes bootSequence {
+    0% { opacity: 0; transform: scaleY(0.01) translateY(20px); filter: brightness(3); }
+    100% { opacity: 1; transform: scaleY(1) translateY(0); filter: brightness(1); }
 }
-.flower__sparkle:nth-child(6) {
-  top: 70%;
-  left: 20%;
+
+/* Header */
+.top-status {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 255, 204, 0.3);
+    padding-bottom: 15px;
+    margin-bottom: 35px;
 }
-.flower__sparkle:nth-child(7) {
-  top: 60%;
-  right: 20%;
+
+.highlight { color: var(--matrix-bright); text-shadow: 0 0 8px var(--matrix-glow); }
+
+.pulse-dot {
+    width: 8px; height: 8px;
+    background: var(--matrix-bright);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    box-shadow: 0 0 10px var(--matrix-bright);
+    animation: pulse 2s infinite;
 }
-.flower__sparkle:nth-child(8) {
-  top: 35%;
-  right: 20%;
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.access-text {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--matrix-bright);
+    letter-spacing: 2px;
 }
-.flower__wrapper {
-  position: relative;
-  padding: 20vh 40vh;
-  border-radius: 50% 50% 0 0;
-  background: linear-gradient(#fff -100%, transparent);
-  overflow: hidden;
+
+h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 900;
+    line-height: 0.85;
+    margin: 15px 0;
+    letter-spacing: -3px;
+    text-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
 }
-.flower__wrapper:before {
-  content: "";
-  position: absolute;
-  top: 4%;
-  left: 4%;
-  display: block;
-  width: 92%;
-  height: 96%;
-  background: radial-gradient(circle at top left, #fff -800%, transparent);
-  border-radius: 50% 50% 0 0;
+
+.role-bar {
+    font-family: 'Fira Code', monospace;
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    margin-bottom: 50px;
+    border-left: 3px solid var(--matrix-bright);
+    padding-left: 15px;
 }
-.flower__wrapper:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at top left, #fff -800%, transparent);
+
+/* Contenido Principal */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 50px;
 }
-.flower__head {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  width: 20vh;
-  height: 20vh;
-  margin-bottom: -10vh;
-  transform: rotateX(75deg);
+
+@media (max-width: 800px) {
+    .grid-layout { grid-template-columns: 1fr; }
+    .cyber-panel { padding: 30px; }
 }
-.flower__petal {
-  position: absolute;
-  bottom: 40%;
-  width: 20vh;
-  height: 20vh;
+
+p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin-bottom: 25px;
+    text-align: justify;
 }
-.flower__petal:after {
-  content: "";
-  position: relative;
-  top: 0rem;
-  left: 60%;
-  display: block;
-  width: 2px;
-  height: 80%;
-  background: #f5fccd;
-  transform: rotate(45deg);
+
+strong { color: var(--matrix-bright); font-weight: 600; }
+
+.vision-quote {
+    background: rgba(0, 255, 204, 0.05);
+    padding: 30px;
+    border-radius: 4px;
+    position: relative;
+    margin-top: 40px;
 }
-.flower__petal--left {
-  left: -50%;
-  border-radius: 0 50% 40% 50%;
-  background: linear-gradient(135deg, #f5fccd, #ff7d66);
-  transform-origin: 100% 100%;
+
+.quote-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--matrix-bright);
+    position: absolute;
+    top: -10px; left: 20px;
+    background: var(--bg-black);
+    padding: 0 10px;
 }
-.flower__petal--left:after {
-  left: unset;
-  right: -40%;
-  transform: rotate(135deg);
+
+.vision-quote p {
+    color: #fff;
+    font-style: italic;
+    font-size: 1.25rem;
+    margin: 0;
 }
-.flower__petal--right {
-  right: -50%;
-  border-radius: 50% 0 50% 40%;
-  background: linear-gradient(-135deg, #f5fccd, #ff7d66);
-  transform-origin: 0 100%;
+
+/* Sidebar Skills */
+.data-box {
+    margin-bottom: 35px;
 }
-.flower__petal--front {
-  transform: scaleY(-1);
+
+.data-box h3 {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    color: var(--matrix-bright);
+    margin-bottom: 20px;
 }
-.flower__center {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(#ff7d66, #eb80b1);
-  border-radius: 50% 50% 35% 35%;
+
+.skills-list {
+    list-style: none;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
 }
-.flower__seeds {
-  position: absolute;
-  bottom: 2vh;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin-bottom: 3vh;
+
+.skills-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-dim);
+    transition: 0.3s;
 }
-.flower__seed {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background-color: #fff;
+
+.skills-list li::before { content: ">> "; color: var(--matrix-bright); }
+.skills-list li:hover { color: var(--matrix-bright); transform: translateX(5px); }
+
+/* Terminal */
+.terminal-footer {
+    background: #000;
+    padding: 25px;
+    margin-top: 50px;
+    border-radius: 4px;
+    font-family: 'Fira Code', monospace;
 }
-.flower__seed:nth-child(1) {
-  top: 60%;
-  left: 40%;
-}
-.flower__seed:nth-child(2) {
-  top: 40%;
-  left: 60%;
-}
-.flower__seed:nth-child(3) {
-  top: 50%;
-  left: 50%;
-}
-.flower__seed:nth-child(4) {
-  top: 60%;
-  left: 60%;
-}
-.flower__seed:nth-child(5) {
-  top: 40%;
-  left: 40%;
-}
-.flower__seed:nth-child(6) {
-  top: 50%;
-  left: 30%;
-}
-.flower__seed:nth-child(7) {
-  top: 30%;
-  left: 50%;
-}
-.flower__seed:nth-child(8) {
-  top: 70%;
-  left: 50%;
-}
-.flower__seed:nth-child(9) {
-  top: 50%;
-  left: 70%;
-}
-.flower__steam-wrapper {
-  position: relative;
-  width: 2.5vh;
-  height: 60vh;
-}
-.flower__steam-wrapper:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -200%;
-  width: 500%;
-  height: 10vh;
-  border-radius: 0 0 50% 50%;
-  background: linear-gradient(#000038, #80c0a1);
-}
-.flower__leaf {
-  position: absolute;
-  width: 400%;
-  height: 15%;
-  background: #80c0a1;
-  border-radius: 50% 0 50% 0;
-}
-.flower__leaf:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #80c0a1;
-  transform: rotate(-45deg);
-  filter: brightness(1);
-}
-.flower__leaf--first {
-  bottom: 25%;
-  left: 100%;
-  background: linear-gradient(-135deg, #80c0a1, #f5fccd);
-  transform-origin: -10%;
-}
-.flower__leaf--second {
-  top: 30%;
-  right: 100%;
-  background: linear-gradient(45deg, #80c0a1, #f5fccd);
-  transform: scaleY(-1);
-  transform-origin: 110%;
-  z-index: 1;
-}
-.flower__steam {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(#000038, #80c0a1, #f5fccd);
-  border-radius: 0 0 1rem 0;
-  overflow: hidden;
-}
-.flower__steam-end {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 4vh;
-  background: linear-gradient(#ff7d66, #f5fccd);
-  border-radius: 50% 20% 50% 0;
+
+.terminal-line { margin-bottom: 8px; font-size: 0.9rem; color: var(--matrix-bright); }
+.terminal-line.response { color: #fff; opacity: 0.8; }
+.prompt { color: var(--matrix-bright); font-weight: bold; }
+.cursor { animation: blink 0.8s infinite; }
+
+@keyframes blink { 50% { opacity: 0; } }
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.2);
+    letter-spacing: 2px;
 }
