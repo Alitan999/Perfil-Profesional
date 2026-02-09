@@ -67,4 +67,3 @@ setInterval(updateSystemTime, 1000);
 
 // Generar un ID de Sesión único al azar
 document.getElementById('session-id').innerText = `AS-${Math.floor(Math.random() * 9000 + 1000)}-${Math.random().toString(36).substring(7).toUpperCase()}`;
-
