@@ -4,31 +4,272 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALAN JESÚS SERVÍN TREJO | Cyber Portfolio</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #00ffcc;
+            --matrix-green: #00ff41;
+            --bg-dark: #0a0a0a;
+            --glass-bg: rgba(10, 10, 10, 0.8);
+            --border-glow: 0 0 10px var(--neon-cyan);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: #e0e0e0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .main-frame {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--neon-cyan);
+            box-shadow: var(--border-glow);
+            padding: 40px;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        header {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(0, 255, 204, 0.3);
+            padding-bottom: 30px;
+        }
+
+        .avatar-box {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border: 2px solid var(--neon-cyan);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2) brightness(0.8);
+        }
+
+        .scan-bar {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 15px var(--neon-cyan);
+            top: 0;
+            left: 0;
+            z-index: 2;
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: -5%; }
+            50% { top: 105%; }
+            100% { top: -5%; }
+        }
+
+        .header-info h1 {
+            font-family: 'Fira Code', monospace;
+            font-size: 2.2rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.1;
+        }
+
+        .sys-id {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: rgba(0, 255, 204, 0.6);
+            margin-bottom: 5px;
+        }
+
+        .role-tag {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--matrix-green);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        .about-text strong {
+            color: var(--neon-cyan);
+            font-weight: 600;
+        }
+
+        .philosophy-card {
+            margin-top: 30px;
+            padding: 20px;
+            border-left: 3px solid var(--neon-cyan);
+            background: rgba(0, 255, 204, 0.05);
+            font-style: italic;
+        }
+
+        .tech-stack h3 {
+            font-family: 'Fira Code', monospace;
+            color: var(--neon-cyan);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            border-bottom: 1px solid var(--neon-cyan);
+            display: inline-block;
+        }
+
+        .tech-item {
+            margin-bottom: 20px;
+        }
+
+        .tech-item h4 {
+            font-family: 'Fira Code', monospace;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .tech-item p {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .objective-box {
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px dashed var(--neon-cyan);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .objective-box h4 {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--neon-cyan);
+            margin-bottom: 10px;
+        }
+
+        .objective-box p {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .terminal-box {
+            margin-top: 40px;
+            background: #000;
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px solid #333;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--matrix-green);
+            min-height: 150px;
+        }
+
+        .term-line { margin-bottom: 5px; }
+        .white-text { color: #fff; }
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background: var(--matrix-green);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-info h1 {
+                font-size: 1.8rem;
+            }
+            .role-tag {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .container {
+                padding: 10px;
+                margin: 20px auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Background Layers -->
     <canvas id="matrix-canvas"></canvas>
-    <div class="overlay-vignette"></div>
 
     <div class="container">
         <main class="main-frame">
             <header>
                 <div class="avatar-box">
                     <div class="scan-bar"></div>
-                    <img src="avatar.png" alt="Alan Jesús Servín Trejo" class="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                    <div class="avatar-placeholder" style="display:none;">[ NO_AVATAR_DETECTION ]</div>
+                    <img src="avatar.png" alt="Alan Jesús Servín Trejo" class="avatar-img" onerror="this.src='https://via.placeholder.com/150/000000/00ffcc?text=SCANNING'">
                 </div>
                 <div class="header-info">
                     <div class="sys-id">UID: SERVIN_TREJO_CORE_v5.1</div>
                     <h1>ALAN JESÚS<br>SERVÍN TREJO</h1>
                     <div class="role-tag">
                         <span>[ CYBERSECURITY ]</span>
-                        <span>[ DIGITAL INNOVATION ]</span>
+                        <span>[ INNOVATION ]</span>
                         <span>[ PHOTOGRAPHY ]</span>
                     </div>
                 </div>
@@ -37,13 +278,10 @@
             <div class="content-grid">
                 <section class="about-text">
                     <p>
-                        Soy un entusiasta de la tecnología con un fuerte interés en la <strong>ciberseguridad, la innovación digital y la fotografía</strong>. Me motiva comprender cómo funcionan los sistemas desde su base, analizar riesgos y desarrollar soluciones que aporten seguridad, eficiencia y valor real.
+                        Mi nombre es <strong>Alan Jesús Servín Trejo</strong> y soy un entusiasta de la tecnología con un fuerte interés en la <strong>ciberseguridad, la innovación digital y la fotografía</strong>. Me motiva comprender cómo funcionan los sistemas desde su base, analizar riesgos y desarrollar soluciones que aporten seguridad, eficiencia y valor real.
                     </p>
                     <p>
-                        A lo largo de mi formación y proyectos personales he explorado áreas como <strong>desarrollo web, inteligencia artificial, automatización y hardware</strong>, siempre con una mentalidad analítica y orientada a la mejora continua.
-                    </p>
-                    <p>
-                        Paralelamente, la <strong>fotografía</strong> se ha convertido en una herramienta creativa que me permite observar, documentar y comunicar ideas desde una perspectiva visual y técnica.
+                        A lo largo de mi formación y proyectos personales he explorado áreas como <strong>desarrollo web, inteligencia artificial, automatización y hardware</strong>, siempre con una mentalidad analítica y orientada a la mejora continua. Paralelamente, la <strong>fotografía</strong> se ha convertido en una herramienta creativa que me permite observar, documentar y comunicar ideas desde una perspectiva visual y técnica.
                     </p>
 
                     <div class="philosophy-card">
@@ -54,42 +292,42 @@
                 </section>
 
                 <aside class="tech-stack">
-                    <h3>Languages & Environments</h3>
+                    <h3>Technologies</h3>
                     
                     <div class="tech-item">
                         <h4>JavaScript</h4>
-                        <p>Web development, interactive apps, and server-side logic.</p>
+                        <p>Desarrollo web, aplicaciones interactivas y lógica del lado del cliente y servidor.</p>
                     </div>
 
                     <div class="tech-item">
                         <h4>Python</h4>
-                        <p>Automation, AI, scripting, and data analysis.</p>
+                        <p>Enfocado en automatización, scripts, inteligencia artificial y análisis de datos.</p>
                     </div>
 
                     <div class="tech-item">
                         <h4>C / C++ (Arduino)</h4>
-                        <p>Hardware projects, control, and embedded systems.</p>
+                        <p>Para proyectos de hardware, control y sistemas embebidos.</p>
                     </div>
 
                     <div class="tech-item">
                         <h4>HTML & CSS</h4>
-                        <p>Modern UI/UX design and structure.</p>
+                        <p>Estructuración y diseño de interfaces web modernas.</p>
                     </div>
 
                     <div class="objective-box">
                         <h4>CAREER_OBJECTIVE</h4>
-                        <p>Protecting systems and networks in increasingly complex digital environments.</p>
+                        <p>Mi objetivo profesional es formarme en la carrera de <strong>Ciberseguridad</strong>, especializándome en la protección de sistemas, redes e información en entornos digitales cada vez más complejos. Aspiro a combinar mis conocimientos técnicos con mi enfoque creativo para desarrollar proyectos sólidos, seguros y con impacto.</p>
                     </div>
                 </aside>
             </div>
 
-            <div class="terminal-box">
+            <div class="terminal-box" id="terminal">
                 <div class="term-line">$ system_init --profile "Alan_Servin"</div>
-                <div class="term-line">> Analyzing risks... [OK]</div>
-                <div class="term-line">> Loading visual narrative... [OK]</div>
-                <div class="term-line">> Loading BinarySearch modules... [OK]</div>
-                <div class="term-line">> Status: <span class="white-text">SYSTEM READY FOR SECURE DEPLOYMENT</span></div>
-                <div class="term-line">$ <span class="cursor">█</span></div>
+                <div class="term-line">> Analyzing risks... <span class="white-text">[OK]</span></div>
+                <div class="term-line">> Loading binary_search_module... <span class="white-text">[OK]</span></div>
+                <div class="term-line">> Loading biometric_scan... <span class="white-text">[OK]</span></div>
+                <div class="term-line">> Status: <span class="white-text">READY FOR SECURE DEPLOYMENT</span></div>
+                <div class="term-line">$ <span class="cursor"></span></div>
             </div>
         </main>
 
@@ -98,7 +336,55 @@
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Matrix Effect
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@&%*<>[]{}/';
+        const fontSize = 14;
+        const columns = Math.floor(width / fontSize);
+
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            const newColumns = Math.floor(width / fontSize);
+            if (newColumns > drops.length) {
+                for (let i = drops.length; i < newColumns; i++) {
+                    drops[i] = Math.random() * -100;
+                }
+            }
+        });
+
+        setInterval(drawMatrix, 50);
+
+        // Terminal cursor effect is handled via CSS animation
+    </script>
 </body>
 </html>
-
