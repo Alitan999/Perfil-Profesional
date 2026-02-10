@@ -98,6 +98,11 @@
             100% { top: -5%; }
         }
 
+        .header-info {
+            position: relative;
+            flex-grow: 1;
+        }
+
         .header-info h1 {
             font-family: 'Fira Code', monospace;
             font-size: 2.2rem;
@@ -121,6 +126,27 @@
             font-family: 'Fira Code', monospace;
             font-size: 0.75rem;
             color: var(--matrix-green);
+        }
+
+        .lang-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 5px 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .lang-toggle:hover {
+            background: var(--neon-cyan);
+            color: var(--bg-dark);
+            box-shadow: 0 0 10px var(--neon-cyan);
         }
 
         .content-grid {
@@ -236,6 +262,11 @@
                 flex-direction: column;
                 text-align: center;
             }
+            .lang-toggle {
+                position: static;
+                margin-top: 15px;
+                display: inline-block;
+            }
             .content-grid {
                 grid-template-columns: 1fr;
             }
@@ -265,6 +296,7 @@
                     <img src="avatar.png" alt="Alan Jesús Servín Trejo" class="avatar-img" onerror="this.src='https://via.placeholder.com/150/000000/00ffcc?text=SCANNING'">
                 </div>
                 <div class="header-info">
+                    <button class="lang-toggle" id="lang-btn">[ LANG: ES ]</button>
                     <div class="sys-id">UID: SERVIN_TREJO_CORE_v5.1</div>
                     <h1>ALAN JESÚS<br>SERVÍN TREJO</h1>
                     <div class="role-tag">
@@ -277,46 +309,46 @@
 
             <div class="content-grid">
                 <section class="about-text">
-                    <p>
+                    <p id="bio-p1">
                         Mi nombre es <strong>Alan Jesús Servín Trejo</strong> y soy un entusiasta de la tecnología con un fuerte interés en la <strong>ciberseguridad, la innovación digital y la fotografía</strong>. Me motiva comprender cómo funcionan los sistemas desde su base, analizar riesgos y desarrollar soluciones que aporten seguridad, eficiencia y valor real.
                     </p>
-                    <p>
+                    <p id="bio-p2">
                         A lo largo de mi formación y proyectos personales he explorado áreas como <strong>desarrollo web, inteligencia artificial, automatización y hardware</strong>, siempre con una mentalidad analítica y orientada a la mejora continua. Paralelamente, la <strong>fotografía</strong> se ha convertido en una herramienta creativa que me permite observar, documentar y comunicar ideas desde una perspectiva visual y técnica.
                     </p>
 
                     <div class="philosophy-card">
-                        <p class="quote">
+                        <p class="quote" id="philosophy-text">
                             "Creo firmemente que la tecnología no solo debe funcionar, sino también ser responsable, segura y capaz de contar historias."
                         </p>
                     </div>
                 </section>
 
                 <aside class="tech-stack">
-                    <h3>Technologies</h3>
+                    <h3 id="tech-title">Technologies</h3>
                     
                     <div class="tech-item">
                         <h4>JavaScript</h4>
-                        <p>Desarrollo web, aplicaciones interactivas y lógica del lado del cliente y servidor.</p>
+                        <p id="tech-js">Desarrollo web, aplicaciones interactivas y lógica del lado del cliente y servidor.</p>
                     </div>
 
                     <div class="tech-item">
                         <h4>Python</h4>
-                        <p>Enfocado en automatización, scripts, inteligencia artificial y análisis de datos.</p>
+                        <p id="tech-py">Enfocado en automatización, scripts, inteligencia artificial y análisis de datos.</p>
                     </div>
 
                     <div class="tech-item">
                         <h4>C / C++ (Arduino)</h4>
-                        <p>Para proyectos de hardware, control y sistemas embebidos.</p>
+                        <p id="tech-c">Para proyectos de hardware, control y sistemas embebidos.</p>
                     </div>
 
                     <div class="tech-item">
                         <h4>HTML & CSS</h4>
-                        <p>Estructuración y diseño de interfaces web modernas.</p>
+                        <p id="tech-html">Estructuración y diseño de interfaces web modernas.</p>
                     </div>
 
                     <div class="objective-box">
                         <h4>CAREER_OBJECTIVE</h4>
-                        <p>Mi objetivo profesional es formarme en la carrera de <strong>Ciberseguridad</strong>, especializándome en la protección de sistemas, redes e información en entornos digitales cada vez más complejos. Aspiro a combinar mis conocimientos técnicos con mi enfoque creativo para desarrollar proyectos sólidos, seguros y con impacto.</p>
+                        <p id="objective-text">Mi objetivo profesional es formarme en la carrera de <strong>Ciberseguridad</strong>, especializándome en la protección de sistemas, redes e información en entornos digitales cada vez más complejos. Aspiro a combinar mis conocimientos técnicos con mi enfoque creativo para desarrollar proyectos sólidos, seguros y con impacto.</p>
                     </div>
                 </aside>
             </div>
@@ -384,7 +416,52 @@
 
         setInterval(drawMatrix, 50);
 
-        // Terminal cursor effect is handled via CSS animation
+        // Translation Logic
+        const translations = {
+            es: {
+                btn: "[ LANG: ES ]",
+                bioP1: 'Mi nombre es <strong>Alan Jesús Servín Trejo</strong> y soy un entusiasta de la tecnología con un fuerte interés en la <strong>ciberseguridad, la innovación digital y la fotografía</strong>. Me motiva comprender cómo funcionan los sistemas desde su base, analizar riesgos y desarrollar soluciones que aporten seguridad, eficiencia y valor real.',
+                bioP2: 'A lo largo de mi formación y proyectos personales he explorado áreas como <strong>desarrollo web, inteligencia artificial, automatización y hardware</strong>, siempre con una mentalidad analítica y orientada a la mejora continua. Paralelamente, la <strong>fotografía</strong> se ha convertido en una herramienta creativa que me permite observar, documentar y comunicar ideas desde una perspectiva visual y técnica.',
+                philosophy: '"Creo firmemente que la tecnología no solo debe funcionar, sino también ser responsable, segura y capaz de contar historias."',
+                techTitle: "Technologies",
+                techJs: "Desarrollo web, aplicaciones interactivas y lógica del lado del cliente y servidor.",
+                techPy: "Enfocado en automatización, scripts, inteligencia artificial y análisis de datos.",
+                techC: "Para proyectos de hardware, control y sistemas embebidos.",
+                techHtml: "Estructuración y diseño de interfaces web modernas.",
+                objective: 'Mi objetivo profesional es formarme en la carrera de <strong>Ciberseguridad</strong>, especializándome en la protección de sistemas, redes e información en entornos digitales cada vez más complejos. Aspiro a combinar mis conocimientos técnicos con mi enfoque creativo para desarrollar proyectos sólidos, seguros y con impacto.'
+            },
+            en: {
+                btn: "[ LANG: EN ]",
+                bioP1: 'My name is <strong>Alan Jesús Servín Trejo</strong> and I am a technology enthusiast with a strong interest in <strong>cybersecurity, digital innovation, and photography</strong>. I am motivated to understand how systems work from the ground up, analyze risks, and develop solutions that provide security, efficiency, and real value.',
+                bioP2: 'Throughout my training and personal projects, I have explored areas such as <strong>web development, artificial intelligence, automation, and hardware</strong>, always with an analytical mindset oriented toward continuous improvement. Simultaneously, <strong>photography</strong> has become a creative tool that allows me to observe, document, and communicate ideas from a visual and technical perspective.',
+                philosophy: '"I firmly believe that technology should not only work but also be responsible, secure, and capable of telling stories."',
+                techTitle: "Technologies",
+                techJs: "Web development, interactive applications, and client/server-side logic.",
+                techPy: "Focused on automation, scripts, artificial intelligence, and data analysis.",
+                techC: "For hardware projects, control, and embedded systems.",
+                techHtml: "Structuring and designing modern web interfaces.",
+                objective: 'My professional goal is to pursue a career in <strong>Cybersecurity</strong>, specializing in the protection of systems, networks, and information in increasingly complex digital environments. I aspire to combine my technical knowledge with my creative approach to develop solid, secure, and impactful projects.'
+            }
+        };
+
+        let currentLang = 'es';
+        const langBtn = document.getElementById('lang-btn');
+
+        langBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            const langData = translations[currentLang];
+
+            langBtn.innerText = langData.btn;
+            document.getElementById('bio-p1').innerHTML = langData.bioP1;
+            document.getElementById('bio-p2').innerHTML = langData.bioP2;
+            document.getElementById('philosophy-text').innerText = langData.philosophy;
+            document.getElementById('tech-title').innerText = langData.techTitle;
+            document.getElementById('tech-js').innerText = langData.techJs;
+            document.getElementById('tech-py').innerText = langData.techPy;
+            document.getElementById('tech-c').innerText = langData.techC;
+            document.getElementById('tech-html').innerText = langData.techHtml;
+            document.getElementById('objective-text').innerHTML = langData.objective;
+        });
     </script>
 </body>
 </html>
